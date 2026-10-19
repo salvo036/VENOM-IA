@@ -10,11 +10,8 @@ class VenomApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Venom IA',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFF0F0F11),
-      ),
+      theme: ThemeData.dark(),
       home: const VenomHomeScreen(),
     );
   }
@@ -28,100 +25,99 @@ class VenomHomeScreen extends StatefulWidget {
 }
 
 class _VenomHomeScreenState extends State<VenomHomeScreen> {
-  bool isVenomAiOn = true;
-  bool isMicrophoneOn = true;
-  bool isCameraOn = true;
+  bool venomAiEnabled = true;
+  bool microfonoEnabled = true;
+  bool fotocameraEnabled = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0F0F11),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             children: [
+              // Bar in alto
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.08),
-                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white10,
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: const Row(
                       children: [
-                        Icon(Icons.videocam_outlined, size: 16, color: Colors.white70),
-                        SizedBox(width: 6),
+                        Icon(Icons.videocam, size: 16, color: Colors.white70),
+                        SizedBox(width: 5),
                         Text('Ray-Ban Meta', style: TextStyle(fontSize: 12, color: Colors.white70)),
                       ],
                     ),
                   ),
-                  Row(
+                  const Row(
                     children: [
-                      Icon(Icons.bluetooth, size: 20, color: Colors.white.withOpacity(0.6)),
-                      const SizedBox(width: 15),
-                      Icon(Icons.settings_outlined, size: 20, color: Colors.white.withOpacity(0.6)),
+                      Icon(Icons.bluetooth, size: 18, color: Colors.white70),
+                      SizedBox(width: 15),
+                      Icon(Icons.settings, size: 18, color: Colors.white70),
                     ],
                   ),
                 ],
               ),
+              
               const Spacer(),
-              Container(
-                width: 140,
-                height: 140,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black,
-                  border: Border.all(color: Colors.white10, width: 2),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.8),
-                      blurRadius: 20,
-                      spreadRadius: 5,
+
+              // Logo Venom con onde audio
+              Center(
+                child: Column(
+                  children: [
+                    Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: const Color(0xFF1E1E22),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.6),
+                            blurRadius: 15,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '🕷️',
+                          style: TextStyle(fontSize: 65),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+                    const Icon(Icons.graphic_eq, color: Colors.white38, size: 36),
+                    const SizedBox(height: 15),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'ATTIVO ',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        Icon(Icons.mic, color: Colors.redAccent, size: 18),
+                      ],
                     ),
                   ],
                 ),
-                child: const Center(
-                  child: Icon(Icons.face_retouching_natural, size: 80, color: Colors.white),
-                ),
               ),
-              const SizedBox(height: 30),
-              SizedBox(
-                height: 40,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    25,
-                    (index) => Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 2),
-                      width: 3,
-                      height: (index % 5 + 1) * 6.0,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'ATTIVO ',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
-                  Icon(Icons.mic, color: Colors.red, size: 18),
-                ],
-              ),
-              const SizedBox(height: 25),
+
+              const Spacer(),
+
+              // Blocco interruttori (Venom AI, Microfono, Fotocamera)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 decoration: BoxDecoration(
@@ -129,31 +125,84 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildSwitchControl('VENOM AI', isVenomAiOn, (val) => setState(() => isVenomAiOn = val)),
-                    _buildSwitchControl('MICROFONO', isMicrophoneOn, (val) => setState(() => isMicrophoneOn = val)),
-                    _buildSwitchControl('FOTOCAMERA', isCameraOn, (val) => setState(() => isCameraOn = val)),
+                    _buildSwitchItem('VENOM AI', venomAiEnabled, (v) => setState(() => venomAiEnabled = v)),
+                    _buildSwitchItem('MICROFONO', microfonoEnabled, (v) => setState(() => microfonoEnabled = v)),
+                    _buildSwitchItem('FOTOCAMERA', fotocameraEnabled, (v) => setState(() => fotocameraEnabled = v)),
                   ],
                 ),
               ),
-              const SizedBox(height: 15),
+
+              const SizedBox(height: 12),
+
+              // Blocco selezione voci
               Row(
                 children: [
-                  Expanded(child: _buildVoiceCard('VOCE ORIGINALE (FILM)', true)),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1A1A1E),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.white12),
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.face, size: 28, color: Colors.redAccent),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('VOCE', style: TextStyle(fontSize: 10, color: Colors.white54)),
+                                Text('ORIGINALE\n(FILM)', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   const SizedBox(width: 10),
-                  Expanded(child: _buildVoiceCard('VOCE UMANA', false)),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1A1A1E),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.person, size: 28, color: Colors.white38),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('VOCE', style: TextStyle(fontSize: 10, color: Colors.white54)),
+                                Text('UMANA', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 20),
+
+              const SizedBox(height: 15),
+
+              // Pulsante Modalità Chat
               SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: 52,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF25252A),
+                    backgroundColor: const Color(0xFF25252B),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                   onPressed: () {},
@@ -175,49 +224,20 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
     );
   }
 
-  Widget _buildSwitchControl(String title, bool value, Function(bool) onChanged) {
+  Widget _buildSwitchItem(String label, bool value, ValueChanged<bool> onChanged) {
     return Column(
       children: [
         Switch(
           value: value,
-          activeColor: Colors.red,
           onChanged: onChanged,
+          activeColor: Colors.white,
+          activeTrackColor: Colors.redAccent,
         ),
         Text(
-          title,
-          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white70),
+          label,
+          style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white70),
         ),
       ],
     );
   }
-
-  Widget _buildVoiceCard(String title, bool isOriginal) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1E),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(isOriginal ? Icons.face : Icons.person, size: 24, color: Colors.white),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Icon(Icons.graphic_eq, color: Colors.white.withOpacity(0.5), size: 18),
-        ],
-      ),
-    );
-  }
 }
-//aggiornato
