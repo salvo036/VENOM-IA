@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,7 +33,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0C0C0E),
+      backgroundColor: const Color(0xFF0A0A0C),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
@@ -45,7 +46,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF18181C),
+                      color: const Color(0xFF16161A),
                       borderRadius: BorderRadius.circular(18),
                     ),
                     child: const Row(
@@ -68,42 +69,42 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
               const Spacer(),
 
-              // Logo Venom Dettagliato + Onda Fluida
+              // Logo Venom e Onda Audio
               Center(
                 child: Column(
                   children: [
                     Container(
-                      width: 135,
-                      height: 135,
+                      width: 130,
+                      height: 130,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: const Color(0xFF141417),
+                        color: const Color(0xFF131316),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.9),
-                            blurRadius: 18,
-                            spreadRadius: 4,
+                            color: Colors.black.withOpacity(0.8),
+                            blurRadius: 15,
+                            spreadRadius: 3,
                           ),
                         ],
                       ),
                       child: Center(
                         child: CustomPaint(
-                          size: const Size(90, 90),
-                          painter: VenomDetailedFacePainter(),
+                          size: const Size(80, 80),
+                          painter: VenomPreciseFacePainter(),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 20),
                     
-                    // Onda audio continua stile mockup
+                    // Onda audio fluida corretta
                     SizedBox(
-                      height: 35,
-                      width: 240,
+                      height: 30,
+                      width: 260,
                       child: CustomPaint(
-                        painter: SmoothAudioWavePainter(),
+                        painter: CleanWaveformPainter(),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 12),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -112,7 +113,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                           style: TextStyle(
                             color: Color(0xFFFF3B30),
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                            fontSize: 14,
                             letterSpacing: 1.2,
                           ),
                         ),
@@ -129,7 +130,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF141417),
+                  color: const Color(0xFF131316),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -151,17 +152,17 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF141417),
+                        color: const Color(0xFF131316),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.white24, width: 1.2),
                       ),
                       child: Row(
                         children: [
                           SizedBox(
-                            width: 24,
-                            height: 24,
+                            width: 22,
+                            height: 22,
                             child: CustomPaint(
-                              painter: VenomDetailedFacePainter(),
+                              painter: VenomPreciseFacePainter(),
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -183,12 +184,12 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF141417),
+                        color: const Color(0xFF131316),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Row(
                         children: [
-                          Icon(Icons.person, size: 24, color: Colors.white38),
+                          Icon(Icons.person, size: 22, color: Colors.white38),
                           SizedBox(width: 8),
                           const Expanded(
                             child: Column(
@@ -214,7 +215,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E1E22),
+                    backgroundColor: const Color(0xFF1C1C20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -258,44 +259,44 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
   }
 }
 
-// Disegna il volto iconico e aggressivo di Venom con denti multipli
-class VenomDetailedFacePainter extends CustomPainter {
+// Disegno fedele del volto di Venom con occhi affilati e dentatura minacciosa
+class VenomPreciseFacePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paintWhite = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.fill;
 
-    // Occhio Sinistro Affilato
-    final pathLeft = Path();
-    pathLeft.moveTo(size.width * 0.15, size.height * 0.3);
-    pathLeft.quadraticBezierTo(size.width * 0.4, size.height * 0.05, size.width * 0.46, size.height * 0.5);
-    pathLeft.quadraticBezierTo(size.width * 0.3, size.height * 0.65, size.width * 0.15, size.height * 0.3);
-    canvas.drawPath(pathLeft, paintWhite);
+    // Occhio sinistro
+    final eyeLeft = Path();
+    eyeLeft.moveTo(size.width * 0.15, size.height * 0.35);
+    eyeLeft.quadraticBezierTo(size.width * 0.38, size.height * 0.1, size.width * 0.45, size.height * 0.5);
+    eyeLeft.quadraticBezierTo(size.width * 0.3, size.height * 0.6, size.width * 0.15, size.height * 0.35);
+    canvas.drawPath(eyeLeft, paintWhite);
 
-    // Occhio Destro Affilato
-    final pathRight = Path();
-    pathRight.moveTo(size.width * 0.85, size.height * 0.3);
-    pathRight.quadraticBezierTo(size.width * 0.6, size.height * 0.05, size.width * 0.54, size.height * 0.5);
-    pathRight.quadraticBezierTo(size.width * 0.7, size.height * 0.65, size.width * 0.85, size.height * 0.3);
-    canvas.drawPath(pathRight, paintWhite);
+    // Occhio destro
+    final eyeRight = Path();
+    eyeRight.moveTo(size.width * 0.85, size.height * 0.35);
+    eyeRight.quadraticBezierTo(size.width * 0.62, size.height * 0.1, size.width * 0.55, size.height * 0.5);
+    eyeRight.quadraticBezierTo(size.width * 0.7, size.height * 0.6, size.width * 0.85, size.height * 0.35);
+    canvas.drawPath(eyeRight, paintWhite);
 
-    // Bocca e Denti aguzzi
+    // Denti e bocca ghignante
     final paintTeeth = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2;
 
     final mouth = Path();
-    mouth.moveTo(size.width * 0.2, size.height * 0.7);
-    mouth.quadraticBezierTo(size.width * 0.5, size.height * 0.95, size.width * 0.8, size.height * 0.7);
+    mouth.moveTo(size.width * 0.22, size.height * 0.68);
+    mouth.quadraticBezierTo(size.width * 0.5, size.height * 0.95, size.width * 0.78, size.height * 0.68);
     canvas.drawPath(mouth, paintTeeth);
 
-    // Denti verticali stilizzati
-    for (double i = 0.3; i <= 0.7; i += 0.1) {
+    // Linee dei denti aguzzi
+    for (double i = 0.3; i <= 0.7; i += 0.08) {
       canvas.drawLine(
-        Offset(size.width * i, size.height * 0.73),
-        Offset(size.width * (i + 0.03), size.height * 0.82),
+        Offset(size.width * i, size.height * 0.72),
+        Offset(size.width * (i + 0.02), size.height * 0.82),
         paintTeeth,
       );
     }
@@ -305,21 +306,23 @@ class VenomDetailedFacePainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-// Disegna l'onda audio fluida centrale
-class SmoothAudioWavePainter extends CustomPainter {
+// Onda audio liscia e sinuosa come nel mockup
+class CleanWaveformPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFFFF3B30).withOpacity(0.7)
+      ..color = const Color(0xFFFF3B30).withOpacity(0.85)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
+      ..strokeWidth = 2.0
+      ..strokeCap = StrokeCap.round;
 
     final path = Path();
-    double centerY = size.height / 2;
+    final double centerY = size.height / 2;
     path.moveTo(0, centerY);
 
-    for (double x = 0; x < size.width; x += 5) {
-      double y = centerY + Math.sin(x * 0.15) * (10 + Math.sin(x * 0.05) * 5);
+    for (double x = 0; x <= size.width; x += 2) {
+      // Formula trigonometrica pulita per un'onda armonica
+      double y = centerY + math.sin(x * 0.08) * (8 * math.sin(x * 0.03).abs() + 3);
       path.lineTo(x, y);
     }
 
@@ -328,12 +331,4 @@ class SmoothAudioWavePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-// Supporto per Math
-class Math {
-  static double sin(double radians) => stdSin(radians);
-  static double stdSin(double radians) => 
-      // Semplificazione trigonometrica nativa per Flutter
-      (radians % 6.28); 
 }
