@@ -32,10 +32,10 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0C),
+      backgroundColor: const Color(0xFF0C0C0E),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
           child: Column(
             children: [
               // Header
@@ -43,24 +43,24 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1C1C20),
-                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xFF18181C),
+                      borderRadius: BorderRadius.circular(18),
                     ),
                     child: const Row(
                       children: [
-                        Icon(Icons.videocam, size: 16, color: Colors.white70),
-                        SizedBox(width: 6),
-                        Text('Ray-Ban Meta', style: TextStyle(fontSize: 12, color: Colors.white70)),
+                        Icon(Icons.videocam, size: 15, color: Colors.white70),
+                        SizedBox(width: 5),
+                        Text('Ray-Ban Meta', style: TextStyle(fontSize: 11, color: Colors.white70)),
                       ],
                     ),
                   ),
                   const Row(
                     children: [
-                      Icon(Icons.bluetooth, size: 18, color: Colors.white70),
-                      SizedBox(width: 15),
-                      Icon(Icons.settings, size: 18, color: Colors.white70),
+                      Icon(Icons.bluetooth, size: 17, color: Colors.white70),
+                      SizedBox(width: 14),
+                      Icon(Icons.settings, size: 17, color: Colors.white70),
                     ],
                   ),
                 ],
@@ -68,50 +68,42 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
               const Spacer(),
 
-              // Logo Venom Custom (Vettoriale)
+              // Logo Venom Dettagliato + Onda Fluida
               Center(
                 child: Column(
                   children: [
                     Container(
-                      width: 140,
-                      height: 140,
+                      width: 135,
+                      height: 135,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: const Color(0xFF16161A),
+                        color: const Color(0xFF141417),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.8),
-                            blurRadius: 20,
-                            spreadRadius: 5,
+                            color: Colors.black.withOpacity(0.9),
+                            blurRadius: 18,
+                            spreadRadius: 4,
                           ),
                         ],
                       ),
                       child: Center(
                         child: CustomPaint(
-                          size: const Size(80, 80),
-                          painter: VenomFacePainter(),
+                          size: const Size(90, 90),
+                          painter: VenomDetailedFacePainter(),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 18),
                     
-                    // Ondulazione audio stile mockup
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(15, (index) {
-                        double height = (index % 3 == 0) ? 28 : (index % 2 == 0 ? 18 : 10);
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 2),
-                          width: 3,
-                          height: height,
-                          decoration: BoxDecoration(
-                            color: Colors.redAccent.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        );
-                      }),
+                    // Onda audio continua stile mockup
+                    SizedBox(
+                      height: 35,
+                      width: 240,
+                      child: CustomPaint(
+                        painter: SmoothAudioWavePainter(),
+                      ),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 10),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -120,11 +112,11 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                           style: TextStyle(
                             color: Color(0xFFFF3B30),
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            letterSpacing: 1.5,
+                            fontSize: 15,
+                            letterSpacing: 1.2,
                           ),
                         ),
-                        Icon(Icons.mic, color: Color(0xFFFF3B30), size: 18),
+                        Icon(Icons.mic, color: Color(0xFFFF3B30), size: 16),
                       ],
                     ),
                   ],
@@ -133,12 +125,12 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
               const Spacer(),
 
-              // Sezione Interruttori
+              // Sezione Interruttori Unificata
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF16161A),
-                  borderRadius: BorderRadius.circular(22),
+                  color: const Color(0xFF141417),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -150,32 +142,35 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 ),
               ),
 
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
 
               // Sezione Voci
               Row(
                 children: [
                   Expanded(
                     child: Container(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF16161A),
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(color: Colors.white24, width: 1.5),
+                        color: const Color(0xFF141417),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.white24, width: 1.2),
                       ),
                       child: Row(
                         children: [
-                          CustomPaint(
-                            size: const Size(26, 26),
-                            painter: VenomFacePainter(),
+                          SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CustomPaint(
+                              painter: VenomDetailedFacePainter(),
+                            ),
                           ),
-                          const SizedBox(width: 10),
+                          const SizedBox(width: 8),
                           const Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('VOCE', style: TextStyle(fontSize: 10, color: Colors.white54)),
-                                Text('ORIGINALE\n(FILM)', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white)),
+                                Text('VOCE', style: TextStyle(fontSize: 9, color: Colors.white54)),
+                                Text('ORIGINALE\n(FILM)', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
                               ],
                             ),
                           ),
@@ -186,21 +181,21 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Container(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF16161A),
-                        borderRadius: BorderRadius.circular(18),
+                        color: const Color(0xFF141417),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Row(
                         children: [
-                          Icon(Icons.person, size: 26, color: Colors.white38),
-                          SizedBox(width: 10),
-                          Expanded(
+                          Icon(Icons.person, size: 24, color: Colors.white38),
+                          SizedBox(width: 8),
+                          const Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('VOCE', style: TextStyle(fontSize: 10, color: Colors.white54)),
-                                Text('UMANA', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white)),
+                                Text('VOCE', style: TextStyle(fontSize: 9, color: Colors.white54)),
+                                Text('UMANA', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
                               ],
                             ),
                           ),
@@ -211,17 +206,17 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 ],
               ),
 
-              const SizedBox(height: 14),
+              const SizedBox(height: 12),
 
               // Pulsante Modalità Chat
               SizedBox(
                 width: double.infinity,
-                height: 54,
+                height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF222228),
+                    backgroundColor: const Color(0xFF1E1E22),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                   onPressed: () {},
@@ -230,13 +225,13 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      letterSpacing: 1.2,
+                      fontSize: 13,
+                      letterSpacing: 1.1,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 8),
             ],
           ),
         ),
@@ -253,50 +248,92 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
           activeColor: Colors.white,
           activeTrackColor: const Color(0xFFFF3B30),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 2),
         Text(
           label,
-          style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white70),
+          style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white70),
         ),
       ],
     );
   }
 }
 
-// Disegna il volto iconico di Venom (Occhi bianchi obliqui e fessure)
-class VenomFacePainter extends CustomPainter {
+// Disegna il volto iconico e aggressivo di Venom con denti multipli
+class VenomDetailedFacePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paintWhite = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.fill;
 
-    // Occhio Sinistro
+    // Occhio Sinistro Affilato
     final pathLeft = Path();
-    pathLeft.moveTo(size.width * 0.15, size.height * 0.25);
-    pathLeft.quadraticBezierTo(size.width * 0.45, size.height * 0.1, size.width * 0.48, size.height * 0.55);
-    pathLeft.quadraticBezierTo(size.width * 0.3, size.height * 0.7, size.width * 0.15, size.height * 0.25);
+    pathLeft.moveTo(size.width * 0.15, size.height * 0.3);
+    pathLeft.quadraticBezierTo(size.width * 0.4, size.height * 0.05, size.width * 0.46, size.height * 0.5);
+    pathLeft.quadraticBezierTo(size.width * 0.3, size.height * 0.65, size.width * 0.15, size.height * 0.3);
     canvas.drawPath(pathLeft, paintWhite);
 
-    // Occhio Destro
+    // Occhio Destro Affilato
     final pathRight = Path();
-    pathRight.moveTo(size.width * 0.85, size.height * 0.25);
-    pathRight.quadraticBezierTo(size.width * 0.55, size.height * 0.1, size.width * 0.52, size.height * 0.55);
-    pathRight.quadraticBezierTo(size.width * 0.7, size.height * 0.7, size.width * 0.85, size.height * 0.25);
+    pathRight.moveTo(size.width * 0.85, size.height * 0.3);
+    pathRight.quadraticBezierTo(size.width * 0.6, size.height * 0.05, size.width * 0.54, size.height * 0.5);
+    pathRight.quadraticBezierTo(size.width * 0.7, size.height * 0.65, size.width * 0.85, size.height * 0.3);
     canvas.drawPath(pathRight, paintWhite);
 
-    // Denti / Bocca
+    // Bocca e Denti aguzzi
     final paintTeeth = Paint()
-      ..color = Colors.white70
+      ..color = Colors.white
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
+      ..strokeWidth = 1.2;
 
-    final mouthPath = Path();
-    mouthPath.moveTo(size.width * 0.25, size.height * 0.75);
-    mouthPath.quadraticBezierTo(size.width * 0.5, size.height * 0.95, size.width * 0.75, size.height * 0.75);
-    canvas.drawPath(mouthPath, paintTeeth);
+    final mouth = Path();
+    mouth.moveTo(size.width * 0.2, size.height * 0.7);
+    mouth.quadraticBezierTo(size.width * 0.5, size.height * 0.95, size.width * 0.8, size.height * 0.7);
+    canvas.drawPath(mouth, paintTeeth);
+
+    // Denti verticali stilizzati
+    for (double i = 0.3; i <= 0.7; i += 0.1) {
+      canvas.drawLine(
+        Offset(size.width * i, size.height * 0.73),
+        Offset(size.width * (i + 0.03), size.height * 0.82),
+        paintTeeth,
+      );
+    }
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+// Disegna l'onda audio fluida centrale
+class SmoothAudioWavePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFFFF3B30).withOpacity(0.7)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0;
+
+    final path = Path();
+    double centerY = size.height / 2;
+    path.moveTo(0, centerY);
+
+    for (double x = 0; x < size.width; x += 5) {
+      double y = centerY + Math.sin(x * 0.15) * (10 + Math.sin(x * 0.05) * 5);
+      path.lineTo(x, y);
+    }
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+// Supporto per Math
+class Math {
+  static double sin(double radians) => stdSin(radians);
+  static double stdSin(double radians) => 
+      // Semplificazione trigonometrica nativa per Flutter
+      (radians % 6.28); 
 }
