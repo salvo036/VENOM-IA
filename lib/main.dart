@@ -40,7 +40,6 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             children: [
-              // Header Superiore
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -68,8 +67,6 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 ],
               ),
               const Spacer(),
-
-              // Logo centrale Venom
               Container(
                 width: 140,
                 height: 140,
@@ -90,8 +87,6 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-
-              // Forma d'onda audio
               SizedBox(
                 height: 40,
                 child: Row(
@@ -111,8 +106,6 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-
-              // Stato ATTIVO
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -129,8 +122,6 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 ],
               ),
               const SizedBox(height: 25),
-
-              // Box Controlli Switch
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 decoration: BoxDecoration(
@@ -147,8 +138,6 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-
-              // Sezione Voci
               Row(
                 children: [
                   Expanded(child: _buildVoiceCard('VOCE ORIGINALE (FILM)', true)),
@@ -157,8 +146,6 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-
-              // Pulsante Modalità Chat
               SizedBox(
                 width: double.infinity,
                 height: 50,
