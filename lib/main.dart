@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -36,9 +35,13 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
       backgroundColor: const Color(0xFF09090C),
       body: Stack(
         children: [
-          // Venature sfondo
+          // Sfondo Reale con Venature Simbiotiche
           Positioned.fill(
-            child: CustomPaint(painter: SymbioteBackgroundPainter()),
+            child: Image.asset(
+              'venom_bg.png',
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => const SizedBox(),
+            ),
           ),
           SafeArea(
             child: Padding(
@@ -52,7 +55,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF16161A),
+                          color: const Color(0xFF16161A).withOpacity(0.85),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Row(
@@ -75,7 +78,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                   const Spacer(),
 
-                  // Volto Venom + Onda audio rossa
+                  // Volto Venom + Spettro Audio Reale dal Mockup
                   Center(
                     child: Column(
                       children: [
@@ -99,15 +102,19 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 18),
+                        const SizedBox(height: 15),
 
-                        // Onda audio rossa fluida
+                        // Immagine dello Spettro Audio Reale
                         SizedBox(
-                          height: 35,
-                          width: 260,
-                          child: CustomPaint(painter: RedAudioWavePainter()),
+                          height: 45,
+                          width: 280,
+                          child: Image.asset(
+                            'venom_wave.png',
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                          ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 8),
 
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -130,11 +137,11 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                   const Spacer(),
 
-                  // Interruttori con icone sopra
+                  // Box Interruttori
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF141418),
+                      color: const Color(0xFF141418).withOpacity(0.92),
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Row(
@@ -177,7 +184,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                         child: Container(
                           padding: const EdgeInsets.all(14),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF141418),
+                            color: const Color(0xFF141418).withOpacity(0.92),
                             borderRadius: BorderRadius.circular(18),
                             border: Border.all(color: Colors.white24, width: 1.2),
                           ),
@@ -235,7 +242,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                         child: Container(
                           padding: const EdgeInsets.all(14),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF141418),
+                            color: const Color(0xFF141418).withOpacity(0.92),
                             borderRadius: BorderRadius.circular(18),
                           ),
                           child: const Column(
@@ -322,52 +329,4 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
       ],
     );
   }
-}
-
-class RedAudioWavePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFFFF3B30)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0
-      ..strokeCap = StrokeCap.round;
-
-    final path = Path();
-    final double centerY = size.height / 2;
-    path.moveTo(0, centerY);
-
-    for (double x = 0; x <= size.width; x += 1) {
-      double envelope = math.sin((x / size.width) * math.pi);
-      double wave = math.sin(x * 0.2) * 7 + math.cos(x * 0.08) * 10;
-      double y = centerY + (wave * envelope);
-      path.lineTo(x, y);
-    }
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-class SymbioteBackgroundPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withOpacity(0.04)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.5;
-
-    final path = Path();
-    path.moveTo(0, size.height * 0.1);
-    path.quadraticBezierTo(size.width * 0.3, size.height * 0.3, size.width * 0.1, size.height * 0.6);
-    path.moveTo(size.width, size.height * 0.15);
-    path.quadraticBezierTo(size.width * 0.7, size.height * 0.4, size.width * 0.9, size.height * 0.75);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
