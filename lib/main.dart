@@ -78,7 +78,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                   const Spacer(),
 
-                  // Volto Venom Rimpicciolito Correttamente
+                  // Volto Venom
                   Center(
                     child: Column(
                       children: [
@@ -106,15 +106,15 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
 
-                        // Spettro Audio Trasparente
+                        // Spettro Audio Ingrandito a Tutto Schermo
                         SizedBox(
-                          height: 45,
-                          width: 280,
+                          height: 80,
+                          width: MediaQuery.of(context).size.width,
                           child: Image.asset(
                             'venom_wave.png',
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) => const SizedBox(),
                           ),
                         ),
