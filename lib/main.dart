@@ -35,7 +35,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
       backgroundColor: const Color(0xFF09090C),
       body: Stack(
         children: [
-          // Sfondo Reale con Venature Simbiotiche
+          // Sfondo Simbiotico
           Positioned.fill(
             child: Image.asset(
               'venom_bg.png',
@@ -78,7 +78,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                   const Spacer(),
 
-                  // Volto Venom + Spettro Audio Reale Fuso
+                  // Volto Venom Rimpicciolito Correttamente
                   Center(
                     child: Column(
                       children: [
@@ -87,6 +87,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                           height: 145,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
+                            color: Colors.black,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.9),
@@ -96,32 +97,25 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                             ],
                           ),
                           child: ClipOval(
-                            child: Image.asset(
-                              'venom_head.png',
-                              fit: BoxFit.cover,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image.asset(
+                                'venom_head.png',
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(height: 15),
 
-                        // Spettro Audio fuso senza sfondo nero
+                        // Spettro Audio Trasparente
                         SizedBox(
                           height: 45,
                           width: 280,
-                          child: ShaderMask(
-                            shaderCallback: (rect) {
-                              return const LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Colors.white, Colors.transparent],
-                              ).createShader(rect);
-                            },
-                            blendMode: BlendMode.dstIn,
-                            child: Image.asset(
-                              'venom_wave.png',
-                              fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) => const SizedBox(),
-                            ),
+                          child: Image.asset(
+                            'venom_wave.png',
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) => const SizedBox(),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -162,7 +156,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                             child: SizedBox(
                               width: 20,
                               height: 20,
-                              child: Image.asset('venom_head.png', fit: BoxFit.cover),
+                              child: Image.asset('venom_head.png', fit: BoxFit.contain),
                             ),
                           ),
                           label: 'VENOM AI',
@@ -207,7 +201,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                                     child: SizedBox(
                                       width: 22,
                                       height: 22,
-                                      child: Image.asset('venom_head.png', fit: BoxFit.cover),
+                                      child: Image.asset('venom_head.png', fit: BoxFit.contain),
                                     ),
                                   ),
                                   const SizedBox(width: 8),
