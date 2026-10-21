@@ -78,7 +78,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                   const Spacer(),
 
-                  // Volto Venom + Spettro Audio Reale dal Mockup
+                  // Volto Venom + Spettro Audio Reale Fuso
                   Center(
                     child: Column(
                       children: [
@@ -104,14 +104,24 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                         ),
                         const SizedBox(height: 15),
 
-                        // Immagine dello Spettro Audio Reale
+                        // Spettro Audio fuso senza sfondo nero
                         SizedBox(
                           height: 45,
                           width: 280,
-                          child: Image.asset(
-                            'venom_wave.png',
-                            fit: BoxFit.contain,
-                            errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                          child: ShaderMask(
+                            shaderCallback: (rect) {
+                              return const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.white, Colors.transparent],
+                              ).createShader(rect);
+                            },
+                            blendMode: BlendMode.dstIn,
+                            child: Image.asset(
+                              'venom_wave.png',
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 8),
