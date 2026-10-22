@@ -108,20 +108,26 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                 const SizedBox(height: 5),
 
-                // Onda Audio a Tutto Schermo
+                // Onda Audio a Tutto Schermo con rimozione automatica dello sfondo
                 SizedBox(
-                  height: 100,
+                  height: 130,
                   width: double.infinity,
-                  child: Image.asset(
-                    'venom_wave.png',
-                    fit: BoxFit.fill,
-                    errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                  child: ColorFiltered(
+                    colorFilter: const ColorFilter.mode(
+                      Colors.black,
+                      BlendMode.screen,
+                    ),
+                    child: Image.asset(
+                      'venom_wave.png',
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                    ),
                   ),
                 ),
 
-                const SizedBox(height: 5),
+                const SizedBox(height: 12),
 
-                // Testo ATTIVO sotto l'onda
+                // Testo ATTIVO posizionato più in basso
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
