@@ -82,8 +82,8 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                 // Volto Venom
                 Container(
-                  width: 145,
-                  height: 145,
+                  width: 130,
+                  height: 130,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
@@ -97,7 +97,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                   child: ClipOval(
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
                         'venom_head.png',
                         fit: BoxFit.contain,
@@ -106,11 +106,11 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
 
-                // Onda Audio a Tutto Schermo (Larghezza Totale Senza Margini)
+                // Onda Audio a Tutto Schermo
                 SizedBox(
-                  height: 110,
+                  height: 100,
                   width: double.infinity,
                   child: Image.asset(
                     'venom_wave.png',
@@ -119,9 +119,9 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 6),
+                const SizedBox(height: 5),
 
-                // Testo ATTIVO
+                // Testo ATTIVO sotto l'onda
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -130,11 +130,11 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                       style: TextStyle(
                         color: Color(0xFFFF3B30),
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                        fontSize: 13,
                         letterSpacing: 1.5,
                       ),
                     ),
-                    Icon(Icons.mic, color: Color(0xFFFF3B30), size: 16),
+                    Icon(Icons.mic, color: Color(0xFFFF3B30), size: 15),
                   ],
                 ),
 
