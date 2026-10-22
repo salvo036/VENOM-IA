@@ -80,10 +80,10 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                 const Spacer(),
 
-                // Volto Venom
+                // Volto Venom leggermente più in alto
                 Container(
-                  width: 125,
-                  height: 125,
+                  width: 120,
+                  height: 120,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
@@ -106,14 +106,15 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 10),
+                // Spaziatore ridotto per spingere l'onda più in basso
+                const SizedBox(height: 25),
 
-                // Onda Audio estesa e con filtro per azzerare il riquadro nero
+                // Onda Audio abbassata e estesa
                 SizedBox(
-                  height: 120,
+                  height: 130,
                   width: double.infinity,
                   child: Transform.scale(
-                    scaleX: 1.15, // Espande ulteriormente oltre i bordi laterali
+                    scaleX: 1.15,
                     child: ColorFiltered(
                       colorFilter: const ColorFilter.mode(
                         Colors.black,
@@ -130,12 +131,12 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                 const Spacer(),
 
-                // Controlli e pulsanti inferiori con la scritta ATTIVO posizionata appena sopra i box
+                // Controlli e pulsanti inferiori con la scritta ATTIVO nella posizione corretta
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
                     children: [
-                      // Testo ATTIVO abbassato in basso
+                      // Testo ATTIVO
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
