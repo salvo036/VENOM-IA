@@ -106,15 +106,15 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                // Spaziatore generoso per spingere l'onda verso il basso
-                const SizedBox(height: 40),
+                // Spaziatore per abbassare l'onda
+                const SizedBox(height: 30),
 
-                // Onda Audio posizionata più in basso
+                // Onda Audio fortemente allargata e posizionata nello spazio centrale
                 SizedBox(
-                  height: 130,
+                  height: 145,
                   width: double.infinity,
                   child: Transform.scale(
-                    scaleX: 1.15,
+                    scaleX: 1.35, // Scala estesa per eliminare i bordi laterali del rettangolo
                     child: ColorFiltered(
                       colorFilter: const ColorFilter.mode(
                         Colors.black,
@@ -131,7 +131,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                 const Spacer(flex: 2),
 
-                // Controlli e pulsanti inferiori con la scritta ATTIVO sopra i box
+                // Controlli e pulsanti inferiori
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
@@ -268,9 +268,9 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.person, size: 20, color: Colors.white54),
-                                      SizedBox(width: 8),
-                                      Expanded(
+                                      const Icon(Icons.person, size: 20, color: Colors.white54),
+                                      const SizedBox(width: 8),
+                                      const Expanded(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
@@ -281,7 +281,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 14),
+                                  const SizedBox(height: 14),
                                 ],
                               ),
                             ),
