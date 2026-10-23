@@ -78,12 +78,12 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                const Spacer(),
+                const Spacer(flex: 1),
 
-                // Volto Venom posizionato più in alto per lasciare spazio sotto
+                // Volto Venom
                 Container(
-                  width: 115,
-                  height: 115,
+                  width: 110,
+                  height: 110,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
@@ -106,12 +106,12 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                // Spaziatore minimo per avvicinare l'onda in basso
-                const SizedBox(height: 5),
+                // Spaziatore generoso per spingere l'onda verso il basso
+                const SizedBox(height: 40),
 
-                // Onda Audio spinta drasticamente più in basso
+                // Onda Audio posizionata più in basso
                 SizedBox(
-                  height: 140,
+                  height: 130,
                   width: double.infinity,
                   child: Transform.scale(
                     scaleX: 1.15,
@@ -129,9 +129,9 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                const Spacer(),
+                const Spacer(flex: 2),
 
-                // Controlli e pulsanti inferiori con la scritta ATTIVO subito sotto l'onda
+                // Controlli e pulsanti inferiori con la scritta ATTIVO sopra i box
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
