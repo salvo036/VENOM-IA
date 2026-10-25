@@ -49,7 +49,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
               children: [
                 // Top bar con padding
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -78,12 +78,12 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                const Spacer(flex: 1),
+                const Spacer(),
 
                 // Volto Venom
                 Container(
-                  width: 110,
-                  height: 110,
+                  width: 130,
+                  height: 130,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
@@ -106,58 +106,54 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                // Spaziatore per abbassare l'onda
-                const SizedBox(height: 30),
+                const Spacer(),
 
-                // Onda Audio fortemente allargata e posizionata nello spazio centrale
+                // Onda Audio abbassata e filtrata
                 SizedBox(
-                  height: 145,
+                  height: 130,
                   width: double.infinity,
-                  child: Transform.scale(
-                    scaleX: 1.35, // Scala estesa per eliminare i bordi laterali del rettangolo
-                    child: ColorFiltered(
-                      colorFilter: const ColorFilter.mode(
-                        Colors.black,
-                        BlendMode.screen,
-                      ),
-                      child: Image.asset(
-                        'venom_wave.png',
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => const SizedBox(),
-                      ),
+                  child: ColorFiltered(
+                    colorFilter: const ColorFilter.mode(
+                      Colors.black,
+                      BlendMode.screen,
+                    ),
+                    child: Image.asset(
+                      'venom_wave.png',
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => const SizedBox(),
                     ),
                   ),
                 ),
 
-                const Spacer(flex: 2),
+                const SizedBox(height: 8),
 
-                // Controlli e pulsanti inferiori
+                // Testo ATTIVO spostato vicino ai controlli inferiori
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'ATTIVO ',
+                      style: TextStyle(
+                        color: Color(0xFFFF3B30),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                    Icon(Icons.mic, color: Color(0xFFFF3B30), size: 15),
+                  ],
+                ),
+
+                const SizedBox(height: 12),
+
+                // Controlli e pulsanti inferiori con padding
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
                     children: [
-                      // Testo ATTIVO
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'ATTIVO ',
-                            style: TextStyle(
-                              color: Color(0xFFFF3B30),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                          Icon(Icons.mic, color: Color(0xFFFF3B30), size: 15),
-                        ],
-                      ),
-
-                      const SizedBox(height: 8),
-
                       // Box Interruttori
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
                         decoration: BoxDecoration(
                           color: const Color(0xFF141418).withOpacity(0.92),
                           borderRadius: BorderRadius.circular(24),
@@ -193,14 +189,14 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 12),
 
                       // Sezione Voci
                       Row(
                         children: [
                           Expanded(
                             child: Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
                                 color: const Color(0xFF141418).withOpacity(0.92),
                                 borderRadius: BorderRadius.circular(18),
@@ -213,8 +209,8 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                                     children: [
                                       ClipOval(
                                         child: SizedBox(
-                                          width: 20,
-                                          height: 20,
+                                          width: 22,
+                                          height: 22,
                                           child: Image.asset('venom_head.png', fit: BoxFit.contain),
                                         ),
                                       ),
@@ -230,7 +226,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 6),
+                                  const SizedBox(height: 10),
                                   Row(
                                     children: [
                                       const Icon(Icons.volume_down, size: 14, color: Colors.white54),
@@ -258,7 +254,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
                                 color: const Color(0xFF141418).withOpacity(0.92),
                                 borderRadius: BorderRadius.circular(18),
@@ -268,9 +264,9 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      const Icon(Icons.person, size: 20, color: Colors.white54),
-                                      const SizedBox(width: 8),
-                                      const Expanded(
+                                      Icon(Icons.person, size: 22, color: Colors.white54),
+                                      SizedBox(width: 8),
+                                      Expanded(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
@@ -281,7 +277,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 14),
+                                  SizedBox(height: 18),
                                 ],
                               ),
                             ),
@@ -289,12 +285,12 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                         ],
                       ),
 
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 12),
 
                       // Pulsante Chat
                       SizedBox(
                         width: double.infinity,
-                        height: 46,
+                        height: 52,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1C1C22),
@@ -314,7 +310,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 6),
                     ],
                   ),
                 ),
