@@ -108,9 +108,9 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
 
                 const Spacer(),
 
-                // Onda Audio abbassata e filtrata
+                // Onda Audio Ingrandita in Altezza
                 SizedBox(
-                  height: 130,
+                  height: 170,
                   width: double.infinity,
                   child: ColorFiltered(
                     colorFilter: const ColorFilter.mode(
@@ -125,9 +125,9 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
 
-                // Testo ATTIVO spostato vicino ai controlli inferiori
+                // Testo ATTIVO abbassato ulteriormente
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
