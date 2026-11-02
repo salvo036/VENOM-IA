@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'venom_brain.dart';
+import 'venom_audio_service.dart';
 
 void main() {
   runApp(const VenomApp());
@@ -28,6 +30,21 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
   bool venomAiEnabled = true;
   bool microfonoEnabled = true;
   bool fotocameraEnabled = true;
+  bool isOriginalFilmVoice = true; // True = Voce originale film, False = Voce umana
+
+  final VenomBrain _brain = VenomBrain();
+  final VenomAudioService _audioService = VenomAudioService();
+
+  @override
+  void initState() {
+    super.initState();
+    _initVenomSystems();
+  }
+
+  Future<void> _initVenomSystems() async {
+    await _brain.initMemory();
+    await _audioService.initAudio();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +52,6 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
       backgroundColor: const Color(0xFF09090C),
       body: Stack(
         children: [
-          // Sfondo Simbiotico
           Positioned.fill(
             child: Image.asset(
               'venom_bg.png',
@@ -43,13 +59,11 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
               errorBuilder: (context, error, stackTrace) => const SizedBox(),
             ),
           ),
-          
           SafeArea(
             child: Column(
               children: [
-                // Top bar con padding
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -77,13 +91,10 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                     ],
                   ),
                 ),
-
                 const Spacer(),
-
-                // Volto Venom
                 Container(
-                  width: 130,
-                  height: 130,
+                  width: 125,
+                  height: 125,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
@@ -105,12 +116,9 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                     ),
                   ),
                 ),
-
                 const Spacer(),
-
-                // Onda Audio Ingrandita in Altezza
                 SizedBox(
-                  height: 170,
+                  height: 155,
                   width: double.infinity,
                   child: ColorFiltered(
                     colorFilter: const ColorFilter.mode(
@@ -124,10 +132,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                     ),
                   ),
                 ),
-
-                const SizedBox(height: 12),
-
-                // Testo ATTIVO abbassato ulteriormente
+                const SizedBox(height: 2),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -143,15 +148,11 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                     Icon(Icons.mic, color: Color(0xFFFF3B30), size: 15),
                   ],
                 ),
-
-                const SizedBox(height: 12),
-
-                // Controlli e pulsanti inferiori con padding
+                const SizedBox(height: 6),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
                     children: [
-                      // Box Interruttori
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
                         decoration: BoxDecoration(
@@ -188,109 +189,117 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                           ],
                         ),
                       ),
-
-                      const SizedBox(height: 12),
-
-                      // Sezione Voci
+                      const SizedBox(height: 10),
+                      // Sezione Selezione Voci collegata
                       Row(
                         children: [
                           Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(14),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF141418).withOpacity(0.92),
-                                borderRadius: BorderRadius.circular(18),
-                                border: Border.all(color: Colors.white24, width: 1.2),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      ClipOval(
-                                        child: SizedBox(
-                                          width: 22,
-                                          height: 22,
-                                          child: Image.asset('venom_head.png', fit: BoxFit.contain),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 8),
-                                      const Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text('VOCE', style: TextStyle(fontSize: 8, color: Colors.white54)),
-                                            Text('ORIGINALE (FILM)', style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white)),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                            child: GestureDetector(
+                              onTap: () => setState(() => isOriginalFilmVoice = true),
+                              child: Container(
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF141418).withOpacity(0.92),
+                                  borderRadius: BorderRadius.circular(18),
+                                  border: Border.all(
+                                    color: isOriginalFilmVoice ? const Color(0xFFFF3B30) : Colors.white24,
+                                    width: isOriginalFilmVoice ? 1.8 : 1.2,
                                   ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.volume_down, size: 14, color: Colors.white54),
-                                      Expanded(
-                                        child: Container(
-                                          margin: const EdgeInsets.symmetric(horizontal: 6),
-                                          height: 3,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white24,
-                                            borderRadius: BorderRadius.circular(2),
-                                          ),
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Container(width: 50, color: Colors.white),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        ClipOval(
+                                          child: SizedBox(
+                                            width: 22,
+                                            height: 22,
+                                            child: Image.asset('venom_head.png', fit: BoxFit.contain),
                                           ),
                                         ),
-                                      ),
-                                      const Icon(Icons.volume_up, size: 14, color: Colors.white54),
-                                    ],
-                                  ),
-                                ],
+                                        const SizedBox(width: 8),
+                                        const Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text('VOCE', style: TextStyle(fontSize: 8, color: Colors.white54)),
+                                              Text('ORIGINALE (FILM)', style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white)),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.volume_down, size: 14, color: Colors.white54),
+                                        Expanded(
+                                          child: Container(
+                                            margin: const EdgeInsets.symmetric(horizontal: 6),
+                                            height: 3,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white24,
+                                              borderRadius: BorderRadius.circular(2),
+                                            ),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Container(width: 50, color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                        const Icon(Icons.volume_up, size: 14, color: Colors.white54),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(14),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF141418).withOpacity(0.92),
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              child: const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(Icons.person, size: 22, color: Colors.white54),
-                                      SizedBox(width: 8),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text('VOCE', style: TextStyle(fontSize: 8, color: Colors.white54)),
-                                            Text('UMANA', style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white)),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                            child: GestureDetector(
+                              onTap: () => setState(() => isOriginalFilmVoice = false),
+                              child: Container(
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF141418).withOpacity(0.92),
+                                  borderRadius: BorderRadius.circular(18),
+                                  border: Border.all(
+                                    color: !isOriginalFilmVoice ? const Color(0xFFFF3B30) : Colors.transparent,
+                                    width: 1.8,
                                   ),
-                                  SizedBox(height: 18),
-                                ],
+                                ),
+                                child: const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.person, size: 22, color: Colors.white54),
+                                        SizedBox(width: 8),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text('VOCE', style: TextStyle(fontSize: 8, color: Colors.white54)),
+                                              Text('UMANA', style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white)),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 18),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
-
-                      const SizedBox(height: 12),
-
-                      // Pulsante Chat
+                      const SizedBox(height: 10),
                       SizedBox(
                         width: double.infinity,
-                        height: 52,
+                        height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1C1C22),
@@ -298,7 +307,10 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                               borderRadius: BorderRadius.circular(16),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            // Test vocale rapido al tocco del pulsante chat
+                            _audioService.speak("Siamo pronti. Nessuno può fregarci.", isOriginalFilmVoice: isOriginalFilmVoice);
+                          },
                           child: const Text(
                             'MODALITÀ CHAT',
                             style: TextStyle(
@@ -310,7 +322,7 @@ class _VenomHomeScreenState extends State<VenomHomeScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 4),
                     ],
                   ),
                 ),
